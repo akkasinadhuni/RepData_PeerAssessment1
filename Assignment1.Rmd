@@ -1,13 +1,11 @@
----
-title: "Reproducible Research: Peer Assessment 1"
-output: 
-  html_document:
-    keep_md: true
----
 
+# **Reproducible Research - Assignment:1**
 
-## Loading and preprocessing the data
+=======================================================================================
 
+Aditya
+
+### **Step:1 - Loading the data**
 After cloning the repository from github and setting the working directory of RStudio to the "RepData_PeerAssessment1" folder, the following code can be used to load the data into R from the cloned repository. If the data is not part of the repository, *download.file()* can be used in accordance with the appropriate url.
 
 ``` {r load_data, echo=T}
@@ -25,9 +23,7 @@ We can format the date column of the dataset appropriately with the following co
 activity_data$date <- as.Date(activity_data$date)
 ```
 
-
-## What is mean total number of steps taken per day?
-
+### **Step:2 - Level-1 Computations.**
 1. Total number of steps taken per day (*nsteps*)
 2. Make a histogram of *nsteps* for each day.
 3. Report the mean and median for *nsteps* per day.
@@ -53,8 +49,7 @@ median_steps <- median(nsteps$totalsteps)
 - Mean of total number of steps taken per day: **`r mean_steps`**
 - Median of total number of steps taken per day: **`r median_steps`**
 
-
-## What is the average daily activity pattern?
+### **Step:3 - Average Daily activity pattern**
 
 For this part of the question we have to first split the activity dataset by the interval for all the days in the dataset and then calculate their average. 
 
@@ -75,8 +70,7 @@ max_avgsteps_interval <- names(which.max(average_steps))
 ```
 - The max average steps interval is: **`r max_avgsteps_interval`**
 
-
-## Imputing missing values
+### **Step:4 - Imputing the Data**
 
 In this step, we will use the mean of the interval/day to fill in the missing values for the corresponding period. The total number of missing cases can be computed by:
 ``` {r missing_values, results='hide'}
@@ -149,7 +143,7 @@ median_imputed <- median(imputed_nsteps$totalsteps)
 
 We observe a very little change (10395 -> 10766) in the median value for the original and imputed datasets. However, the mean changes significantly (9354 -> 10766), especially for cases where the total number of steps per day is less than 10000 steps. The distributions also change quite a bit with the mean value increasing a lot more than it is for the original dataset.
 
-## Are there differences in activity patterns between weekdays and weekends?
+### **Step:5 - Weekdays vs Weekends**
 To make a new factor variable in the imputed dataset that determines the type of day, we will use the **wday()** function from *lubridate* package will be converted to a factor.
 ``` {r weekdays_weekends}
 library(lubridate)
